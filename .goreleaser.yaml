@@ -14,6 +14,7 @@ before:
   - cargo install cargo-zigbuild
 builds:
 - builder: rust
+  binary: dy
   flags:
   - --release
   targets:
@@ -42,3 +43,16 @@ release:
     ---
 
     Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+universal_binaries:
+- replace: true
+brews:
+- name: dynein
+  homepage: https://github.com/farzadmf/dynein
+  description: DynamoDB Command Line Interface
+- repository:
+    owner: farzadmf
+    name: homebrew-tap
+    token: "{{ .Env.BREW_PUBLISHER_TOKEN }}"
+  directory: .
+checksum:
+  name_template: checksums.txt
