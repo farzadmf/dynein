@@ -13,21 +13,13 @@ before:
   - cargo fetch --locked
   - cargo install cargo-zigbuild
 builds:
-- id: linux
-  builder: rust
+- builder: rust
   binary: dy
   flags:
   - --release
   targets:
   - x86_64-unknown-linux-gnu
   - aarch64-unknown-linux-gnu
-- id: macos
-  builder: rust
-  binary: dy
-  command: build
-  flags:
-  - --release
-  targets:
   - x86_64-apple-darwin
   - aarch64-apple-darwin
 archives:
