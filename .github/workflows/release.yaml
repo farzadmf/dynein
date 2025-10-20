@@ -1,0 +1,27 @@
+name: goreleaser
+on:
+  pull_request:
+  # push:
+  #   tags:
+  #   - v*.*
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Install Zig
+      uses: goto-bus-stop/setup-zig@v2
+      with:
+        version: master
+    - name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@v3
+      with:
+        distribution: goreleaser
+        version: latest
+        args: release --clean
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BREW_PUBLISHER_TOKEN: ${{ secrets.BREW_PUBLISHER_TOKEN }}
